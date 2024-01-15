@@ -1,13 +1,14 @@
 import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUserList } from "../../store/actions";
+import { getUserList,getHotMusic } from "../../store/actions";
 
-const Home = ({getUserList,name,userList})=>{
-console.log("test--in Home")
+const Home = ({getUserList,getHotMusic,name,userList})=>{
+console.log("test--in Home",userList)
   useEffect(() => {
     console.log(2222);
-    getUserList();
+     getUserList();
+    // getHotMusic();
   },[])
 
   return (
@@ -36,7 +37,11 @@ console.log("test--in Home")
     </div>
   )
 }
-
+Home.getInitialData = (store) => {
+  console.log("store", store);
+  // will return a promise because of the thunk
+  return store.dispatch(getUserList());
+}
 const mapStateToProps = (state)=>({
   name:state.name,
   userList:state.userList
@@ -45,7 +50,10 @@ const mapStateToProps = (state)=>({
 const mapDispatchToProps = (dispatch)=>({
   getUserList(){
     dispatch(getUserList(dispatch))
-  }
+  },
+  // getHotMusic() {
+  //   dispatch(getHotMusic(dispatch))
+  // }
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home);

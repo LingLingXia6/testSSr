@@ -1,34 +1,39 @@
 import React from 'react';
-import { useRoutes, matchRoutes, Route} from 'react-router-dom';
+import { useRoutes, matchRoutes, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import getStore from '../store/index.js';
 import { Provider } from 'react-redux';
-import  Routers from '../Routes.js';
+import Routers from '../Routes.js';
 
 export const render = (req, res) => {
   console.log('what is request in render', req.path);
   const matches = matchRoutes(Routers, req.path);
-  console.log('matches11', matches[0]?.route,matches[0]?.element);
+  console.log('matches11', matches[0]?.route);
   const context = {};
   const promises = matches.map(({ route }) =>
-    route.loadData ? route.loadData(dispatch) : null
+    
+    route?.element?.type?.getInitialData
+      ? route?.element?.type?.getInitialData(getStore())
+      : null
   );
-  console.log('server--promises', promises);
-  //const Element = useRoutes(Routers);
-  const Element = () => {
-    const element = useRoutes(Routers);
-    return (element);
-  };
-  // StaticRouter 可以用在ssr
-  const content = renderToString(
-    <Provider store={getStore()}>
-      <StaticRouter location={req.path} context={context}>
-        <Element />
-      </StaticRouter>
-    </Provider>
-  );
-  res.send(`<!doctype html>
+  console.log('server--promises--1', promises);
+  Promise.all(promises).then(() => {
+    console.log('server--promises----2', promises);
+    //const Element = useRoutes(Routers);
+    const Element = () => {
+      const element = useRoutes(Routers);
+      return element;
+    };
+    // StaticRouter 可以用在ssr
+    const content = renderToString(
+      <Provider store={getStore()}>
+        <StaticRouter location={req.path} context={context}>
+          <Element />
+        </StaticRouter>
+      </Provider>
+    );
+    res.send(`<!doctype html>
   <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -43,4 +48,5 @@ export const render = (req, res) => {
     </body>
   </html>
 `);
+  });
 };

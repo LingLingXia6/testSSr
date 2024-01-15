@@ -16,10 +16,12 @@ app.use(express.static(publicPath));
 
 app.get("*", (req, res,next) => {
   console.log("app.get", req.path);
+  console.log("req.body", req.body)
+  
   res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
+    
    render(req, res);
  
   

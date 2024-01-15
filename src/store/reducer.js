@@ -1,7 +1,9 @@
+import {combineReducers} from 'redux';
 import { CHANGE_USER_LIST } from './constans';
 const defaultState = { userList: [] };
 
-export default (state = defaultState, action) => {
+const userReducer =(state = defaultState, action) => {
+  console.log("userReducer",action)
   switch (action.type) {
     case CHANGE_USER_LIST:
       return {
@@ -11,4 +13,6 @@ export default (state = defaultState, action) => {
     default:
       return state;
   }
-}
+};
+const  rootReducer = combineReducers({ user: userReducer });
+export default rootReducer;

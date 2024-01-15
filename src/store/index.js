@@ -1,14 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk'
-
-const reducer = (state = { name: 'Lion' }, action) => {
-  return state;
-}
+import rootReducer from './reducer';
 
 const getStore = () => {
   // thunk用来解决异步问题
   const middleware=applyMiddleware(thunk)
-  return createStore(reducer,middleware );
+  return createStore(rootReducer,middleware );
 }
 
 export default getStore;
