@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserList,getHotMusic } from "../../store/actions";
 
-const Home = ({getUserList,getHotMusic,name,userList})=>{
+const Home = ({  getHotMusic, name, userList, hotMusic }) => {
+  console.log("hotMusic",hotMusic)
 console.log("test--in Home",userList)
   useEffect(() => {
     console.log(2222);
-     getUserList();
-    // getHotMusic();
+    //  getUserList();
+     getHotMusic();
   },[])
 
   return (
@@ -40,20 +41,21 @@ console.log("test--in Home",userList)
 Home.getInitialData = (store) => {
   console.log("store", store);
   // will return a promise because of the thunk
-  return store.dispatch(getUserList());
+  return store.dispatch(getHotMusic());
 }
 const mapStateToProps = (state)=>({
   name:state.name,
-  userList:state.userList
+  userList: state.userList,
+  hotMusic:state.hotMusic
 });
 // {1}
 const mapDispatchToProps = (dispatch)=>({
   getUserList(){
     dispatch(getUserList(dispatch))
   },
-  // getHotMusic() {
-  //   dispatch(getHotMusic(dispatch))
-  // }
+  getHotMusic() {
+    dispatch(getHotMusic(dispatch))
+  }
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home);
