@@ -41,9 +41,11 @@ export const render = (req, res) => {
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>SSR</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
       <div id="root">${content}</div>
+      <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
       <script src="/index.js"></script>  
     </body>
   </html>

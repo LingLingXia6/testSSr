@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserList,getHotMusic } from "../../store/actions";
 
+import AwesomeSlider from "react-awesome-slider";
+
+import 'react-awesome-slider/dist/styles.css';
+
+
 const Home = ({  getHotMusic, name, userList, hotMusic }) => {
-  console.log("hotMusic",hotMusic)
-console.log("test--in Home",userList)
+  console.log("hotMusic-component",hotMusic)
+ console.log("test--in Home",userList)
   useEffect(() => {
     console.log(2222);
     //  getUserList();
@@ -15,19 +20,28 @@ console.log("test--in Home",userList)
   return (
     <div>
       <h1>首页110002dd357</h1>
+      
+    
       <ul>
-        {/* {
-         
-          userList?.map(user=>{
-            const { first_name, last_name, email, avatar, id } = user;
-            return <li key={id}>
-              <img src={avatar} alt="用户头像" style={{width:"30px",height:"30px"}}/>
-              <div>姓名：{`${first_name}${last_name}`}</div>
-              <div>email：{email}</div>
-            </li>
-          })
-        } */}
+        
       </ul>
+      <AwesomeSlider>
+        {hotMusic && hotMusic?.length && hotMusic?.map((d) => (
+          <div className="item">
+            <div className="left">
+              <div className="leftContainer">
+                <div className="imgContainer">
+                  <img src={d?.picUrl} />
+                </div>
+                <h2>{d?.name}</h2>
+                <p>{d?.desc} </p>
+              </div>
+            </div>
+
+           
+          </div>
+        ))}
+      </AwesomeSlider>
       <br/>
       <Link to="/login">跳转到登录页</Link>
       <br/>

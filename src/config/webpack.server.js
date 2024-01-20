@@ -15,19 +15,28 @@ const serverConfig = {
     filename: 'bundle.js',
     path:path.resolve(__dirname,'../build')
   },
+  plugins: [new MiniCssExtractPlugin( {
+    filename: '[name].css',
+    chunkFilename: '[id].css',
+    ignoreOrder: false,
+  })],
   module: {
     rules: [
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-        // use: ['style-loader', 'css-loader']
-      }
+        use: [MiniCssExtractPlugin.loader,{
+          loader: 'css-loader',
+          options: {
+            import: true,
+          },
+        },
+       
+        ]
+      },
     ],
     
   },
   
-  externals:[nodeExternals()],
   
 }
 module.exports = merge(serverConfig, commonConfig);

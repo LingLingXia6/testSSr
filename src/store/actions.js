@@ -25,9 +25,12 @@ export const getUserList = () => {
 };
 export const getHotMusic = () => {
   return (dispatch) => {
-    return fetch.get('/top/playlist?limit=8&order=hot').then(res => {
-      console.log("music---data--", res.data.playlists);
-      dispatch(getHotMusicAction(res.data.playlists));
+    return fetch.get('/personalized/newsong').then(res => {
+      console.log("music---data--", res.data?.result);
+      if (res?.data?.result) {
+        dispatch(getHotMusicAction(res.data?.result));
+      }
+      
     })
   }
   
