@@ -9,13 +9,15 @@ const changeUserList = (list) => {
     list 
   }
 }
-const getHotMusicAction = (hotMusics) => {
+const getHotMusicAction = (songs,banners) => {
+  console.log("hotMusics--actiondata", banners);
   return {
     type: GET_HOT_MUSIC,
-    hotMusics,
+    hotMusics: [...songs],
+    banners:[...banners],
   }
 }
-export const getUserList = () => {
+export const  getUserList =  () => {
   return (dispatch) => {
     return axios.get('https://reqres.in/api/users').then(res => {
       console.log("res", res.data.data);
@@ -24,14 +26,16 @@ export const getUserList = () => {
   }
 };
 export const getHotMusic = () => {
-  return (dispatch) => {
-    return fetch.get('/personalized/newsong').then(res => {
-      console.log("music---data--", res.data?.result);
-      if (res?.data?.result) {
-        dispatch(getHotMusicAction(res.data?.result));
-      }
-      
-    })
+  console.log("aaaa");
+  return async (dispatch) => {
+    const bannerInfo = await fetch.get('/banner?type=2');
+    const fetechInfo = await fetch.get('/personalized/newsong');
+    // console.log("getHotMusic--get data", fetechInfo.data.result.length);
+    // console.log("banners", bannerInfo?.data?.banners);
+    if (fetechInfo?.data?.result && bannerInfo?.data?.banners) {
+      dispatch(getHotMusicAction(fetechInfo?.data?.result,bannerInfo?.data?.banners));
+    }
+    
   }
   
 }

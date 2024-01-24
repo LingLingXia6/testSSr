@@ -8,4 +8,8 @@ const getStore = () => {
   return createStore(rootReducer,middleware );
 }
 
+export const getClientStore = () => {
+  return createStore(rootReducer, window.__PRELOADED_STATE__);
+}
+ 
 export default getStore;

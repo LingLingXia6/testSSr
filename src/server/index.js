@@ -6,14 +6,20 @@ import express from 'express';
  import {render} from './render.js';
 
 const path = require('path');
+const webpack = require('webpack');
+const webpackConfig = require('../config/webpack.client.js');
+var compiler = webpack(webpackConfig);
 const app = express();
 const publicPath = path.join(__dirname, '../public');
 app.use(express.static(publicPath));
 // renderToString renders a React tree to an HTML string. 
 //const content = renderToString(<Home />);
-
-
-
+//  webpack-dev-middleware 是一个封装器，可以把webpack处理过的文件发送到一个server
+app.use(require("webpack-dev-middleware")(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  serverSideRender:true,
+}));
+app.use(require("webpack-hot-middleware")(compiler));
 app.get("*", (req, res,next) => {
   console.log("app.get", req.path);
   console.log("req.body", req.body)
@@ -23,7 +29,6 @@ app.get("*", (req, res,next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     
    render(req, res);
- 
   
 });
 app.listen(3000);

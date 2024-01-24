@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:build:client": "webpack  --mode development --config src/config/webpack.client.js --watch",
-    "dev:build:server": "webpack   --mode development --config src/config/webpack.server.js --watch",
+    "build:client": "webpack  --mode development --config src/config/webpack.client.js --watch",
+    "build:server": "webpack   --mode development --config src/config/webpack.server.js --watch",
+    "buidl:init":"npx nodemon --watch server ./server/index",
     "start": "npx nodemon --watch src ./src/build/bundle.js"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "style-loader": "^3.3.4",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^7.0.0",
     "webpack-merge": "^5.10.0",
     "webpack-node-externals": "^3.0.0",
     "yarn": "^1.22.21"

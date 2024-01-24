@@ -3,20 +3,24 @@ import ReactDom from 'react-dom';
 // import { BrowserRouter, useRoutes } from 'react-router-dom';
 import Routes from '../Routes.js';
 import { Provider } from 'react-redux';
-import getStore from '../store/index.js';
+import { getClientStore } from '../store/index.js';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { hydrateRoot } from 'react-dom/client';
+import { hydrateRoot,createRoot } from 'react-dom/client';
 const App = () => {
   const router = createBrowserRouter(Routes);
   
   return (
-    <Provider store={getStore()}>
+    <Provider store={getClientStore()}>
       <RouterProvider router={router} />
       
     </Provider>
   );
 };
-hydrateRoot(document.getElementById('root'),<App /> );
+const render = module.hot ? createRoot : hydrateRoot;
+render(document.getElementById('root'),<App /> );
+if (module.hot) {
+  module.hot.accept();
+}
