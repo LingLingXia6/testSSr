@@ -7,12 +7,12 @@ import AwesomeSlider from 'react-awesome-slider';
 
 import 'react-awesome-slider/dist/styles.css';
 import './index.css';
-const Home = ({ hotMusic, banners }) => {
-  //console.log("home--store-state", Array.isArray(state.hotMusic) );
-  console.log('hotMusic-component', hotMusic?.length);
+const Home = ({  banners,state }) => {
+  
+  console.log('stateHome', state);
 
   useEffect(() => {
-    console.log(2222, hotMusic);
+    // console.log(2222, hotMusic);
     //  getUserList();
     //  getHotMusic();
   }, []);
@@ -31,7 +31,7 @@ const Home = ({ hotMusic, banners }) => {
               <div className='left'>
                 <div className='leftContainer'>
                   <div className='imgContainer'>
-                    <img src={d.pic} />
+                    <img src={d.pic} />1
                   </div>
                 </div>
               </div>
@@ -43,23 +43,12 @@ const Home = ({ hotMusic, banners }) => {
 
   );
 };
-Home.getInitialData = (store) => {
-  console.log('store', store);
-  // will return a promise because of the thunk
-  return store.dispatch(getHotMusic());
-};
+
 const mapStateToProps = (state) => ({
-  hotMusic: state.hotMusic.hotMusics,
-  banners: state.hotMusic.banners,
+  
+  banners: state.banners,
+  state:state,
 });
-// {1}
-// const mapDispatchToProps = (dispatch)=>({
-//   getUserList(){
-//     dispatch(getUserList(dispatch))
-//   },
-//   getHotMusic() {
-//     dispatch(getHotMusic(dispatch))
-//   }
-// })
+
 
 export default connect(mapStateToProps)(Home);

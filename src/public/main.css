@@ -437,7 +437,9 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/container/Home/index.css ***!
   \************************************************************************************************************/
   body{
-    background-color:rgb(66, 41, 41);
+    background-color:brown;
+    width: 528px;
+    height: 900px;
   }
   .aws-btn {
 

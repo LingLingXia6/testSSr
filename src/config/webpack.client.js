@@ -7,10 +7,12 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const clientConfig = {
   mode: 'development',
+  target: 'web',
   entry: {
-    main: ['webpack-hot-middleware/client', path.resolve(__dirname, "../client/index.js")]
+    main: [`webpack-hot-middleware/client?path=localhost:3000/__webpack_hmr&reload=true`,path.resolve(__dirname,"../client/index.js") ]
 },
   output: {
+    publicPath:'/',
     filename: 'index.js',
     path: path.resolve(__dirname, '../public'),
     clean: true,
