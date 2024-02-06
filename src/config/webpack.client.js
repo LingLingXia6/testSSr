@@ -5,12 +5,21 @@ const commonConfig = require('./webpack.common');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin')
 const clientConfig = {
   mode: 'development',
   target: 'web',
   entry: {
-    main: [`webpack-hot-middleware/client?path=localhost:3000/__webpack_hmr&reload=true`,path.resolve(__dirname,"../client/index.js") ]
-},
+    main: ['webpack-hot-middleware/client?reload=true&noInfo=true',path.resolve(__dirname,"../client/index.js")  ]
+  },
+//   devServer: {
+//   contentBase: '../public',
+//   compress: true,
+//   historyApiFallback: true,
+//   hot: true,
+//   open: true,
+//  },
   output: {
     publicPath:'/',
     filename: 'index.js',
@@ -18,12 +27,14 @@ const clientConfig = {
     clean: true,
   },
   plugins: [
+    // new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
       ignoreOrder: false,
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new LoadablePlugin()
   ],
   module: {
     rules: [
@@ -54,6 +65,10 @@ const clientConfig = {
           //   },
           // }
         ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        type: 'asset/resource',
       },
     ],
   },

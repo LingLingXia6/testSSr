@@ -4,14 +4,19 @@ import express from 'express';
 
 // import { StaticRouter } from 'react-router-dom';
  import {render} from './render.js';
-
+ import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
 const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack.client.js');
 var compiler = webpack(webpackConfig);
 const app = express();
-const publicPath = path.join(__dirname, '../public');
-app.use(express.static(publicPath));
+const loadableJson = path.resolve(__dirname, "../public/loadable-stats.json");
+const extractor = new ChunkExtractor({
+  statsFile: loadableJson,
+});
+//const publicPath = path.join(__dirname, );
+
+app.use(express.static('../public'));
 console.log("webpackConfig.output.publicPath", webpackConfig.output);
 // renderToString renders a React tree to an HTML string. 
 //const content = renderToString(<Home />);

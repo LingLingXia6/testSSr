@@ -6,9 +6,14 @@ import getStore from '../store/index.js';
 import { Provider } from 'react-redux';
 import Routers from '../Routes.js';
 import fetch from '../fetcher.js';
+import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
 const path = require('path');
 const filePath = path.resolve(__dirname, '/src/public', 'index.js');
 export const render = async (req, res) => {
+  const loadableJson = path.resolve(__dirname, "../public/loadable-stats.json");
+const extractor = new ChunkExtractor({
+  statsFile: loadableJson,
+});
   console.log('what is request in render', req.path);
   const matches = matchRoutes(Routers, req.path);
   console.log('matches11', matches);
@@ -37,12 +42,16 @@ export const render = async (req, res) => {
     return element;
   };
    // StaticRouter 可以用在ssr
-   const content = renderToString(
+  const content = renderToString(
+    <ChunkExtractorManager>
+
+    
     <Provider store={store}>
       <StaticRouter location={req.path} context={context}>
         <Element />
       </StaticRouter>
-    </Provider>
+      </Provider>
+      </ChunkExtractorManager>
    );
   res.send(
     `<html lang="en">
@@ -64,7 +73,7 @@ export const render = async (req, res) => {
              '\\u003c'
            )}
          </script>
-       <script src="/index.js" defer ></script>  
+         ${extractor.getScriptTags()}
      </body>
      </html>
  `);

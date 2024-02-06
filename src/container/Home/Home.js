@@ -1,54 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserList, getHotMusic } from '../../store/actions';
+import fetch from '../../fetcher.js';
 
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import AwesomeSlider from 'react-awesome-slider';
 
 import 'react-awesome-slider/dist/styles.css';
 import './index.css';
-const Home = ({  banners,state }) => {
-  
+const AutoplaySlider = withAutoplay(AwesomeSlider);
+
+const Home = ({ banners, state, songs }) => {
+  const [playlists, setPlayLists] = useState([]);
   console.log('stateHome', state);
 
   useEffect(() => {
-    // console.log(2222, hotMusic);
-    //  getUserList();
-    //  getHotMusic();
+    fetch('/top/playlist?limit=8&order=hot').then((res) => {
+      console.log("nnn", res);
+      if (res?.data?.playlists) {
+        setPlayLists(res?.data?.playlists);
+      }
+    })
   }, []);
   return (
     <div className='homebg'>
-      <ul></ul>
-     
-
-     
-        
-    
-      <AwesomeSlider animation="cubeAnimation" height={500} width={600} >
+      <AutoplaySlider
+        play={true}
+        cancelOnInteraction={false} // should stop playing on user interaction
+        interval={2000}
+        animation='cubeAnimation'>
         {banners &&
           banners.map((d) => (
             <div className='item' key={d.bannerId}>
               <div className='left'>
                 <div className='leftContainer'>
                   <div className='imgContainer'>
-                    <img src={d.pic} />1
+                    <img className='img' src={d.pic} />
+                    135dd
                   </div>
                 </div>
               </div>
             </div>
           ))}
-      </AwesomeSlider>
-      </div>
+      </AutoplaySlider>
+      <Link to='/playList'>List</Link>
+     {!!playlists.length&& <div className='songs'>
+        {playlists?.map((_playList) => (<div className='songBox'>
+          <img className='songImg' src={_playList?.coverImgUrl} />
+          <div className='songTag'>#{_playList?.tags[0]}</div>
+          <div className='desc'>{_playList?.name}</div>
+        </div>))}
+        </div>
+      }
       
-
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  
   banners: state.banners,
-  state:state,
+  state: state,
+  songs:state.songs,
 });
-
 
 export default connect(mapStateToProps)(Home);

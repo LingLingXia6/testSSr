@@ -4,5 +4,6 @@
       "modules": "commonjs"
     }],
     ["@babel/preset-react"]
-  ]
+  ],
+    "plugins": ["@loadable/babel-plugin"]
 }

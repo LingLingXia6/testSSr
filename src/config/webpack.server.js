@@ -37,6 +37,10 @@ const serverConfig = {
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   externalsPresets: { node: true },   // <-- here
