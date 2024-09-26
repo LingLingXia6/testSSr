@@ -1,18 +1,19 @@
 {
-  "hash": "882084c7a6beaddfc9f8",
+  "hash": "a6ed3add5a0305559d76",
   "publicPath": "/",
   "outputPath": "/Users/xialingling/study/testSSr/src/public",
   "assetsByChunkName": {
     "main": [
       "main.css",
-      "index.js"
+      "index.js",
+      "main.a910b6e82e1f9ea0eeb0.hot-update.js"
     ]
   },
   "assets": [
     {
       "type": "asset",
       "name": "index.js",
-      "size": 1972128,
+      "size": 2160693,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -51,6 +52,29 @@
     },
     {
       "type": "asset",
+      "name": "main.a910b6e82e1f9ea0eeb0.hot-update.js",
+      "size": 8269,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "a910b6e82e1f9ea0eeb0"
+      },
+      "chunkNames": [
+        "main"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "main"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
       "name": "04008c339b30747029a4.png",
       "size": 1268,
       "emitted": false,
@@ -71,6 +95,25 @@
       "auxiliaryChunks": [
         "main"
       ]
+    },
+    {
+      "type": "asset",
+      "name": "main.a910b6e82e1f9ea0eeb0.hot-update.json",
+      "size": 28,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "a910b6e82e1f9ea0eeb0"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [],
+      "auxiliaryChunks": []
     }
   ],
   "namedChunkGroups": {
@@ -85,6 +128,9 @@
         },
         {
           "name": "index.js"
+        },
+        {
+          "name": "main.a910b6e82e1f9ea0eeb0.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -101,7 +147,8 @@
       "id": "main",
       "files": [
         "main.css",
-        "index.js"
+        "index.js",
+        "main.a910b6e82e1f9ea0eeb0.hot-update.js"
       ]
     }
   ]

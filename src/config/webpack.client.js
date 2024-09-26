@@ -72,6 +72,6 @@ const clientConfig = {
       },
     ],
   },
-  // externals:[nodeExternals()],
+
 };
 module.exports = merge(commonConfig, clientConfig);

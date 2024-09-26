@@ -10,7 +10,7 @@ const changeUserList = (list) => {
   }
 }
 const getHotMusicAction = (songs,banners) => {
-  console.log("hotMusics--actiondata", banners);
+  //console.log("hotMusics--actiondata", banners);
   return {
     type: GET_HOT_MUSIC,
     hotMusics: [...songs],
@@ -20,7 +20,7 @@ const getHotMusicAction = (songs,banners) => {
 export const  getUserList =  () => {
   return (dispatch) => {
     return axios.get('https://reqres.in/api/users').then(res => {
-      console.log("res", res.data.data);
+    //  console.log("res", res.data.data);
       dispatch(changeUserList(res.data.data));
     })
   }

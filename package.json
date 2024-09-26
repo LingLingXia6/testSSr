@@ -7,7 +7,7 @@
     "build:client": "rm -rf ./src/public && webpack  --mode development --config src/config/webpack.client.js --watch",
     "build:server": "rm -rf ./src/build && webpack  --mode development --config src/config/webpack.server.js --watch",
     "buidl:init": "npx nodemon --watch server ./server/index",
-    "start": "npx nodemon --watch src ./src/build/bundle.js"
+    "start": "node ./src/build/bundle.js"
   },
   "dependencies": {
     "@babel/core": "^7.23.6",

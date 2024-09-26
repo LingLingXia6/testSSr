@@ -12,11 +12,11 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Home = ({ banners, state, songs }) => {
   const [playlists, setPlayLists] = useState([]);
-  console.log('stateHome', state);
+
 
   useEffect(() => {
     fetch('/top/playlist?limit=8&order=hot').then((res) => {
-      console.log("nnn", res);
+      // console.log("nnn", res);
       if (res?.data?.playlists) {
         setPlayLists(res?.data?.playlists);
       }
@@ -36,7 +36,7 @@ const Home = ({ banners, state, songs }) => {
                 <div className='leftContainer'>
                   <div className='imgContainer'>
                     <img className='img' src={d.pic} />
-                    135dd
+                    
                   </div>
                 </div>
               </div>
@@ -52,7 +52,8 @@ const Home = ({ banners, state, songs }) => {
         </div>))}
         </div>
       }
-      
+      <div>24775</div>
+      <div>1989</div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ const Login = () => {
       Login
       <button onClick={() => {
         alert(22);
-        console.log("click me")
+        // console.log("click me")
       }}>点击</button>
     </div>
   );
